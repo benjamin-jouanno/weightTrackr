@@ -1,0 +1,49 @@
+<app-header [profile]="profil"></app-header>
+<div class="container">
+    <div class="section one">
+        <div class="new-record">
+            <canvas baseChart [data]="chartData" [options]="option" [type]="'line'"> </canvas>
+        </div>
+    </div>
+    <div class="section two">
+        <div class="new-record">
+            <h2 class="title">Add new record</h2>
+            <div class="input-group">
+                <label>Weight</label>
+                <input type="number" [formControl]="weight" placeholder="weight">
+            </div>
+            <div class="input-group">
+                <label>Date</label>
+                <input type="date" [formControl]="date" placeholder="Date (empty if today!)">
+            </div>
+            <button class="green" (click)="addRecord()">Add record</button>
+        </div>
+        <div class="new-record">
+            <h2 class="title">Your informations</h2>
+            <div class="info">
+                <label>Age:</label>
+                <span>{{ageFromDateOfBirthday(profil?.birthDate)}} years old</span>
+            </div>
+            <div class="info">
+                <label>Height:</label>
+                <span>{{profil?.height}} cm</span>
+            </div>
+            <div class="info">
+                <label>Current weigth:</label>
+                <span>{{profil?.weight}} kg</span>
+            </div>
+            <div class="info">
+                <label>Started weigth:</label>
+                <span>{{profil?.inscriptionWeight}} kg</span>
+            </div>
+            <div class="info">
+                <label>Weigth diff</label>
+                <span>{{getWeightDiff()}} kg</span>
+            </div>
+            <div class="info">
+                <label>Inscription date:</label>
+                <span>{{profil?.creationDate | date:'mediumDate'}}</span>
+            </div>
+        </div>
+    </div>
+</div>

@@ -1,0 +1,33 @@
+<div class="container">
+    <div class="head">
+        <h1 class="roboto-black">Select or add your profile</h1>
+    </div>
+    <div *ngIf="!isediting else editing" class="profil-select">
+        <div *ngIf="_profiles | async as profiles">
+            <div *ngFor="let profile of profiles" class="profil-selector blue" (click)="selectProfile(profile)">
+                <span class="username roboto-regular">{{profile.profilName}}</span>
+            </div>
+        </div>
+        <div class="profil-selector grey" (click)="isediting = true">
+            <span class="username roboto-regular">Add new profile</span>
+        </div>
+    </div>
+    <ng-template #editing>
+        <div class="tmpltd">
+            <div class="editor">
+                <div class="inputs">
+                    <input type="text" [formControl]="name" placeholder="name">
+                    <input type="date" [formControl]="birthDate" placeholder="birth date">
+                    <input type="number" [formControl]="height" placeholder="height in cm">
+                    <input type="number" [formControl]="weight" placeholder="weight in kg">
+                    <input type="file" [formControl]="avatar" placeholder="avatar">
+                </div>
+                <div class="cta-range">
+                    <button class="red-btn" (click)="isediting = false">cancel</button>
+                    <button class="submit" (click)="createProfil()">create profile</button>
+                </div>
+                <span *ngIf="isErr" class="err">All fields must be completed!</span>
+            </div>
+        </div>
+    </ng-template>
+</div>
