@@ -2,7 +2,41 @@
 <div class="container">
     <div class="section one">
         <div class="new-record">
-            <canvas baseChart [data]="chartData" [options]="option" [type]="'line'"> </canvas>
+            <canvas id="canvas" baseChart [data]="chartData" [options]="option" [type]="'line'"> </canvas>
+        </div>
+        <div class="graph-section">
+            <div class="graph">
+            <h2 class="title">BMI chart</h2>
+                <div class="bmi">
+                    <span class="bmi-entry gblue">< 18,5</span>
+                    <span class="bmi-entry ggreen"> 18.5 - 24.9</span>
+                    <span class="bmi-entry gyellow">25 - 29.9</span>
+                    <span class="bmi-entry gred">> 29.9</span>
+                </div>
+            </div>
+            <div class="graph">
+                <h2 class="title">BMR chart</h2>
+                <div class="bmr info">
+                    <label>No sport/exercise:</label>
+                    <span>{{calculateBmr() *0.2 + calculateBmr()}} Kcal</span>
+                </div>
+                <div class="bmr info">
+                    <label>Light activity (sport/exercise 1-3 times per week):</label>
+                    <span>{{calculateBmr() * 0.375 + calculateBmr()}} Kcal</span>
+                </div>
+                <div class="bmr info">
+                    <label>Moderate activity (sport/exercise 3-5 times per week):</label>
+                    <span>--> {{calculateBmr() * 0.55 + calculateBmr()}} Kcal</span>
+                </div>
+                <div class="bmr info">
+                    <label>High activity (everyday exercise):</label>
+                    <span>{{calculateBmr() * 0.725 + calculateBmr()}} Kcal</span>
+                </div>
+                <div class="bmr info">
+                    <label>Extreme activity (professional athlete):</label>
+                    <span>{{calculateBmr() * 0.9 + calculateBmr()}} Kcal</span>
+                </div>
+            </div>
         </div>
     </div>
     <div class="section two">
@@ -43,6 +77,34 @@
             <div class="info">
                 <label>Inscription date:</label>
                 <span>{{profil?.creationDate | date:'mediumDate'}}</span>
+            </div>
+        </div>
+        <div class="new-record">
+            <div class="info">
+                <label>Gender:</label>
+                <span>Male</span>
+            </div>
+        </div>
+        <div class="new-record">
+            <h2 class="title">Composition informations</h2>
+            <div class="info">
+                <label>BMI:</label>
+                <span class="indicator blue" *ngIf="(bmi! < 18.5)">Underweight</span>
+                <span class="indicator green" *ngIf="(bmi! >= 18.5 && bmi! <= 24.9)">Normal weight</span>
+                <span class="indicator yellow" *ngIf="(bmi! >= 25 && bmi! <= 29.9)">Overweight</span>
+                <span class="indicator red" *ngIf="(bmi! >= 30)">Obese</span>
+                <span>{{bmi}} </span>
+            </div>
+            <div class="info">
+                <label>Your basal methabolic rate is: (on a 5 workout /week basis)</label>
+                <span>{{calculateBmr() * 0.55 + calculateBmr()}}Kcal</span>
+            </div>
+        </div>
+        <div class="new-record">
+            <h2 class="title">Protein intake</h2>
+            <div class="info">
+                <label>Your daily protein intake to build muscle should be:</label>
+                <span>{{1.7 * profil?.weight!}}g</span>
             </div>
         </div>
     </div>
